@@ -83,6 +83,7 @@ export async function POST(request: Request){
 
         return Response.json({
             message: "User is registered successfully",
+            emailResponse,
             success: true
         }, {status: 200})
 

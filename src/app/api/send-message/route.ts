@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const {username, content} = await request.json();
 
     try {
-        const user = await UserModel.findOne(username);
+        const user = await UserModel.findOne({username});
 
         if(!user) {
             return Response.json({
@@ -38,11 +38,12 @@ export async function POST(request: Request) {
             message: `Message sent to ${user?.username} successfully`
         }, {status: 200});
 
-    } catch (error) {
+    } catch (error: any) {
         console.log("Message could not be sent", error);
         return Response.json({
             success: false,
-            message: "Message could not be sent"
+            message: "Message could not be sent",
+            error
         }, {status: 500});
     }
 }

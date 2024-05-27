@@ -1,4 +1,5 @@
 import {Schema, Document} from "mongoose";
+import mongoose from "mongoose";
 
 export interface Message extends Document{
     content: string
@@ -16,5 +17,7 @@ const messageSchema: Schema<Message> = new Schema({
         default: Date.now
     }
 });
+
+export const MessageModel = (mongoose.models.Message as mongoose.Model<Message>) || (mongoose.model<Message>("Message", messageSchema));
 
 export default messageSchema;

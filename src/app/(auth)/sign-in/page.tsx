@@ -28,7 +28,7 @@ const page = () => {
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      identifier: '',
+      email: '',
       password: ''
     }
   });
@@ -39,9 +39,10 @@ const page = () => {
 
     const result = await signIn('credentials', {
       redirect: false,
-      identifier: data.identifier,
+      email: data.email,
       password: data.password
     });
+    console.log(result);
 
     if(result?.error) {
       toast({
@@ -70,7 +71,7 @@ const page = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
             <FormField
-              name='identifier'
+              name='email'
               control={form.control}
               render={({ field }) => (
                 <FormItem >
